@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import 'uniwind';
+
+@import 'heroui-native/styles';
+
+@source './node_modules/heroui-native/lib';
+
+@layer theme {
+  @variant dark {
+    --background: rgb(10, 16, 29);
+    --accent: rgb(243, 202, 64);
+    --accent-foreground: var(--background);
+
+    --surface: rgb(20 29 49);
+    --field-background: var(--surface);
+    --default: var(--surface);
+  }
+
+  @variant light {
+    --background: rgb(255 254 240);
+    --accent: rgb(243, 202, 64);
+    --accent-foreground: rgb(10, 16, 29);
+
+    --surface: rgb(244 239 222);
+    --field-background: var(--surface);
+    --default: var(--surface);
+  }
+}
