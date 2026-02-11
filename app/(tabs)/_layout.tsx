@@ -14,6 +14,14 @@ export default function TabLayout() {
         <Icon sf="bus.fill" />
         <Label>Buses</Label>
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="lunch">
+        <Icon sf="fork.knife" />
+        <Label>Lunch</Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="news">
+        <Icon sf="newspaper.fill" />
+        <Label>News</Label>
+      </NativeTabs.Trigger>
     </NativeTabs>
   );
 }
