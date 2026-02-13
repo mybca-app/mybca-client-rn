@@ -2,14 +2,16 @@ import NewsCard from '@/components/news/news-card';
 import NewsCardSkeleton from '@/components/news/news-card-skeleton';
 import { $api } from '@/network/client';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useHeaderHeight } from '@react-navigation/elements';
 import { useToast } from 'heroui-native';
 import { useEffect } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Platform, ScrollView, Text, View } from 'react-native';
 import { withUniwind } from 'uniwind';
 
 const StyledIonicons = withUniwind(Ionicons);
 
 export default function NewsScreen() {
+  const headerHeight = useHeaderHeight();
   const { toast } = useToast();
 
   const { data, error } = $api.useQuery(
@@ -31,14 +33,17 @@ export default function NewsScreen() {
         placement: 'bottom',
         actionLabel: 'Close',
         onActionPress: ({ hide }) => hide(),
-      })
+      });
     }
   }, [error]);
 
   return (
     <ScrollView
       className="bg-background"
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{
+        padding: 16,
+        paddingTop: (Platform.OS === 'web' ? headerHeight : 0) + 16,
+      }}
       contentInsetAdjustmentBehavior="automatic"
     >
       <View className="flex flex-col gap-2">

@@ -1,11 +1,18 @@
-import { NativeTabs, Label, Icon } from 'expo-router/unstable-native-tabs';
+import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
 import React from 'react';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { DynamicColorIOS } from 'react-native';
 
 export default function TabLayout() {
   return (
-    <NativeTabs>
+    <NativeTabs
+      tintColor={
+        DynamicColorIOS({
+          dark: 'rgb(243, 202, 64)',
+          light: 'rgb(243, 202, 64)'
+        })
+      }
+    >
       <NativeTabs.Trigger name="(home)">
         <Label>Home</Label>
         <Icon sf="house.fill" />

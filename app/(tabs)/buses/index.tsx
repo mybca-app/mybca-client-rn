@@ -1,13 +1,14 @@
 import BusCard from '@/components/buses/bus-card';
+import BusCardSkeleton from '@/components/buses/bus-card-skeleton';
 import { useFavoriteBuses } from '@/hooks/use-favorite-buses';
 import { $api } from '@/network/client';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useHeaderHeight } from '@react-navigation/elements';
+import * as Haptics from 'expo-haptics';
 import { Button, Input, Select, TextField, useToast } from 'heroui-native';
 import { useEffect, useState } from 'react';
-import { RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Platform, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { withUniwind } from 'uniwind';
-import * as Haptics from 'expo-haptics';
-import BusCardSkeleton from '@/components/buses/bus-card-skeleton';
 
 const StyledIonicons = withUniwind(Ionicons);
 
@@ -24,6 +25,7 @@ const BUS_SCREEN_FILTERS: BusScreenFilter[] = [
 ];
 
 export default function BusesScreen() {
+  const headerHeight = useHeaderHeight();
   const [activeFilter, setActiveFilter] = useState<BusScreenFilter>({ value: 'all', label: 'All' });
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [refreshing, setRefreshing] = useState(false);
@@ -83,8 +85,11 @@ export default function BusesScreen() {
 
   return (
     <ScrollView
-      className="bg-background" 
-      contentContainerStyle={{ padding: 16 }}
+      className="bg-background"
+      contentContainerStyle={{
+        padding: 16,
+        paddingTop: (Platform.OS === 'web' ? headerHeight : 0) + 16,
+      }}
       contentInsetAdjustmentBehavior="automatic"
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />

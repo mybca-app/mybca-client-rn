@@ -1,14 +1,13 @@
 import DatePicker from '@/components/lunch/date-picker';
-import LunchFoodCard from '@/components/lunch/lunch-food-card';
-import LunchHeader from '@/components/lunch/lunch-header';
 import LunchItem from '@/components/lunch/lunch-item';
 import NoLunchToday from '@/components/lunch/no-lunch-today';
 import { $api } from '@/network/client';
 import { components } from '@/network/openapi/v1';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useHeaderHeight } from '@react-navigation/elements';
 import { useToast } from 'heroui-native';
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Platform, ScrollView, Text, View } from 'react-native';
 import { withUniwind } from 'uniwind';
 
 const StyledIonicons = withUniwind(Ionicons);
@@ -25,6 +24,7 @@ function dateToYYYYMMDD(date: Date) {
 }
 
 export default function LunchScreen() {
+  const headerHeight = useHeaderHeight();
   const { toast } = useToast();
   const [date, setDate] = useState(new Date());
   const [menu, setMenu] = useState<components["schemas"]["MenuDayDto"] | null>(null);
@@ -50,7 +50,7 @@ export default function LunchScreen() {
         placement: 'bottom',
         actionLabel: 'Close',
         onActionPress: ({ hide }) => hide(),
-      })
+      });
     }
   }, [error]);
 
@@ -80,7 +80,10 @@ export default function LunchScreen() {
   return (
     <ScrollView
       className="bg-background"
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{
+        padding: 16,
+        paddingTop: (Platform.OS === 'web' ? headerHeight : 0) + 16,
+      }}
       contentInsetAdjustmentBehavior="automatic"
     >
       <View className="flex flex-col gap-2">

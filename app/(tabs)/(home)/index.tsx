@@ -1,10 +1,16 @@
-import { Button, Card, Input, TextField } from 'heroui-native';
-import { ScrollView } from 'react-native';
+import { useHeaderHeight } from '@react-navigation/elements';
+import { Button, Card } from 'heroui-native';
+import { Platform, ScrollView } from 'react-native';
 
 export default function HomeScreen() {
+  const headerHeight = useHeaderHeight();
+  
   return (
     <ScrollView
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{
+        padding: 16,
+        paddingTop: (Platform.OS === 'web' ? headerHeight : 0) + 16,
+      }}
       contentInsetAdjustmentBehavior="automatic"
       className="bg-background"
     >

@@ -9,14 +9,15 @@ export default function LunchFoodCard({
   name,
   description,
   imageUrl,
+  ...props
 }: {
   name: string
   description?: string | null,
-  imageUrl?: string | null
-}) {
+  imageUrl?: string | null,
+} & React.ComponentProps<typeof Pressable>) {
   return (
     <PressableFeedback>
-      <Pressable onPress={async () => { }}>
+      <Pressable {...props}>
         <Card className="w-full">
           <Card.Body className="flex-row gap-4">
             {imageUrl && (
