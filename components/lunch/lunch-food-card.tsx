@@ -16,35 +16,33 @@ export default function LunchFoodCard({
   imageUrl?: string | null,
 } & React.ComponentProps<typeof Pressable>) {
   return (
-    <PressableFeedback>
-      <Pressable {...props}>
-        <Card className="w-full">
-          <Card.Body className="flex-row gap-4">
-            {imageUrl && (
-              <View className="justify-center">
-                <StyledImage
-                  source={{ uri: imageUrl }}
-                  className="size-20 rounded-lg"
-                />
-              </View>
-            )}
-            <View className="justify-center flex-1 overflow-hidden">
-              <Card.Title
-                ellipsizeMode="tail"
-                className="mb-1 flex-wrap"
-              >
-                {name}
-              </Card.Title>
-
-              {description && (
-                <Card.Description>
-                  {description}
-                </Card.Description>
-              )}
+    <PressableFeedback {...props}>
+      <Card className="w-full">
+        <Card.Body className="flex-row gap-4">
+          {imageUrl && (
+            <View className="justify-center">
+              <StyledImage
+                source={{ uri: imageUrl }}
+                className="size-20 rounded-lg"
+              />
             </View>
-          </Card.Body>
-        </Card>
-      </Pressable>
+          )}
+          <View className="justify-center flex-1 overflow-hidden">
+            <Card.Title
+              ellipsizeMode="tail"
+              className="mb-1 flex-wrap"
+            >
+              {name}
+            </Card.Title>
+
+            {description && (
+              <Card.Description>
+                {description}
+              </Card.Description>
+            )}
+          </View>
+        </Card.Body>
+      </Card>
     </PressableFeedback>
   )
 }
