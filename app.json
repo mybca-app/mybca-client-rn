@@ -1,15 +1,18 @@
 {
   "expo": {
-    "name": "mybca-client-rn",
+    "name": "myBCA",
+    "description": "The all-in-one BCA student app",
     "slug": "mybca-client-rn",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "version": "2.0",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "mybcaclientrn",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "githubUrl": "https://github.com/mybca-app/mybca-client-rn",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "link.mybca.mobileclient"
     },
     "android": {
       "adaptiveIcon": {

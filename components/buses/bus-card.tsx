@@ -1,7 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { Button, Card, Chip, PressableFeedback } from 'heroui-native';
-import { Pressable } from 'react-native';
 
 export default function BusCard({
   busName, busPosition, isFavorite, onToggleFavorite
@@ -9,20 +8,22 @@ export default function BusCard({
   busName: string,
   busPosition: string,
   isFavorite: boolean,
-  onToggleFavorite: (busName: string) => void,
+  onToggleFavorite?: (busName: string) => void,
 }) {
   return (
     <PressableFeedback onPress={async () => {
       router.navigate(`/buses/${encodeURIComponent(busName)}`)
     }}>
       <Card className="flex-row gap-2 w-full overflow-hidden">
-        <Card.Header className="items-center justify-center shrink-0">
-          <Button variant="ghost" className="px-2" onPress={() => onToggleFavorite(busName)}>
-            <Button.Label className={isFavorite ? 'text-yellow-400' : ''}>
-              <Ionicons name={isFavorite ? 'star' : 'star-outline'} size={24} />
-            </Button.Label>
-          </Button>
-        </Card.Header>
+        {onToggleFavorite && (
+          <Card.Header className="items-center justify-center shrink-0">
+            <Button variant="ghost" className="px-2" onPress={() => onToggleFavorite(busName)}>
+              <Button.Label className={isFavorite ? 'text-accent' : ''}>
+                <Ionicons name={isFavorite ? 'star' : 'star-outline'} size={24} />
+              </Button.Label>
+            </Button>
+          </Card.Header>
+        )}
 
         <Card.Body className="flex-1 overflow-hidden justify-center">
           <Card.Title

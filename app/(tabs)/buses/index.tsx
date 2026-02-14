@@ -5,6 +5,7 @@ import { $api } from '@/network/client';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useHeaderHeight } from '@react-navigation/elements';
 import * as Haptics from 'expo-haptics';
+import { Stack } from 'expo-router';
 import { Button, Input, Select, TextField, useToast } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import { Platform, RefreshControl, ScrollView, Text, View } from 'react-native';
@@ -161,7 +162,7 @@ export default function BusesScreen() {
             onToggleFavorite={onToggleFavorite}
           />
         )) : (
-          new Array(40).fill('').map((_, index) => <BusCardSkeleton key={index} />)
+          new Array(40).fill('').map((_, index) => <BusCardSkeleton key={index} showStar />)
         )}
       </View>
     </ScrollView>

@@ -1,5 +1,3 @@
-// Thank you, ChatGPT!
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -9,38 +7,34 @@ export function useFavoriteBuses() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const json = await AsyncStorage.getItem(FAVORITES_KEY);
-        if (json) setFavorites(JSON.parse(json));
-      } catch (e) {
-        console.error('Failed to load favorites', e);
-      } finally {
-        setLoading(false);
-      }
-    })();
+  const loadFavorites = useCallback(async () => {
+    setLoading(true);
+    try {
+      const json = await AsyncStorage.getItem(FAVORITES_KEY);
+      setFavorites(json ? JSON.parse(json) : []);
+    } catch (e) {
+      console.error('Failed to load favorites', e);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
+  useEffect(() => {
+    loadFavorites();
+  }, [loadFavorites]);
+
   const toggleFavorite = useCallback(async (busId: string) => {
-    try {
-      setFavorites((current) => {
-        let updated: string[];
-        if (current.includes(busId)) {
-          updated = current.filter(id => id !== busId);
-        } else {
-          updated = [...current, busId];
-        }
+    setFavorites((current) => {
+      const updated = current.includes(busId)
+        ? current.filter(id => id !== busId)
+        : [...current, busId];
 
-        AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(updated)).catch(e =>
-          console.error('Failed to save favorites', e)
-        );
+      AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(updated)).catch(e =>
+        console.error('Failed to save favorites', e)
+      );
 
-        return updated;
-      });
-    } catch (e) {
-      console.error('Error toggling favorite', e);
-    }
+      return updated;
+    });
   }, []);
 
   const isFavorite = useCallback(
@@ -48,5 +42,5 @@ export function useFavoriteBuses() {
     [favorites]
   );
 
-  return { favorites, toggleFavorite, isFavorite, loading };
+  return { favorites, toggleFavorite, isFavorite, loading, refetch: loadFavorites };
 }

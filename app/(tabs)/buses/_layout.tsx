@@ -15,7 +15,7 @@ export default function BusesLayout() {
             <Button size="sm" isIconOnly variant="ghost">
               <Ionicons name="information-circle-outline" size={24} color={useColorScheme() === 'dark' ? '#fff' : '#000'} />
             </Button>
-          )
+          ),
         }}
       />
     </Stack>

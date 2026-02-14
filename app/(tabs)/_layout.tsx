@@ -6,12 +6,8 @@ import { DynamicColorIOS } from 'react-native';
 export default function TabLayout() {
   return (
     <NativeTabs
-      tintColor={
-        DynamicColorIOS({
-          dark: 'rgb(243, 202, 64)',
-          light: 'rgb(243, 202, 64)'
-        })
-      }
+      tintColor="rgb(242, 203, 64)"
+      minimizeBehavior="onScrollDown"
     >
       <NativeTabs.Trigger name="(home)">
         <Label>Home</Label>
