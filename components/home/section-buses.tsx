@@ -1,13 +1,12 @@
-import { useFavoriteBuses } from "@/hooks/use-favorite-buses";
-import { $api } from "@/network/client";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { router, useFocusEffect } from "expo-router";
-import { Button } from "heroui-native";
-import { useCallback } from "react";
-import { Text, View } from "react-native";
-import { withUniwind } from "uniwind";
-import BusCard from "../buses/bus-card";
-import BusCardSkeleton from "../buses/bus-card-skeleton";
+import { useFavoriteBuses } from '@/hooks/use-favorite-buses';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router, useFocusEffect } from 'expo-router';
+import { Button } from 'heroui-native';
+import { useCallback } from 'react';
+import { Text, View } from 'react-native';
+import { withUniwind } from 'uniwind';
+import BusCard from '../buses/bus-card';
+import BusCardSkeleton from '../buses/bus-card-skeleton';
 
 const StyledIonicons = withUniwind(Ionicons);
 

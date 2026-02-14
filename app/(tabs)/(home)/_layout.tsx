@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 
 export default function HomeScreenLayout() {
@@ -6,8 +7,14 @@ export default function HomeScreenLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: 'myBCA',
-          headerTransparent: true
+          headerTitle: () => (
+            <Image
+              source={require('../../../assets/images/logo.svg')}
+              style={{ width: 50, height: 40, resizeMode: 'contain' }}
+            />
+          ),
+          headerTransparent: true,
+          headerShown: true
         }}
       />
     </Stack>
