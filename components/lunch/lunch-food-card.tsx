@@ -1,11 +1,12 @@
 import { Image } from 'expo-image';
 import { Card, PressableFeedback } from 'heroui-native';
+import { memo } from 'react';
 import { Pressable, View } from 'react-native';
 import { withUniwind } from 'uniwind';
 
 const StyledImage = withUniwind(Image);
 
-export default function LunchFoodCard({
+function LunchFoodCard({
   name,
   description,
   imageUrl,
@@ -24,6 +25,7 @@ export default function LunchFoodCard({
               <StyledImage
                 source={{ uri: imageUrl }}
                 className="size-20 rounded-lg"
+                cachePolicy="memory"
               />
             </View>
           )}
@@ -46,3 +48,5 @@ export default function LunchFoodCard({
     </PressableFeedback>
   )
 }
+
+export default memo(LunchFoodCard);

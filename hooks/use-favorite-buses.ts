@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback, useEffect, useState } from 'react';
 
-const FAVORITES_KEY = '@favorite_buses';
+const FAVORITES_KEY = 'mybca_favorite_bus';
 
 export function useFavoriteBuses() {
   const [favorites, setFavorites] = useState<string[]>([]);

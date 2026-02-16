@@ -39,6 +39,7 @@ export default function LunchBottomSheet({
                 <StyledImage
                   source={{ uri: item.imageUrl }}
                   className="w-full aspect-video rounded mb-4"
+                  cachePolicy="memory"
                 />
               )}
               <BottomSheet.Title>{item.name}</BottomSheet.Title>

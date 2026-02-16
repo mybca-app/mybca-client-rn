@@ -1,12 +1,13 @@
-import { Card, PressableFeedback } from 'heroui-native';
 import { Image } from 'expo-image';
-import { Pressable, View } from 'react-native';
-import { withUniwind } from 'uniwind';
 import * as WebBrowser from 'expo-web-browser';
+import { Card, PressableFeedback } from 'heroui-native';
+import { memo } from 'react';
+import { View } from 'react-native';
+import { withUniwind } from 'uniwind';
 
 const StyledImage = withUniwind(Image);
 
-export default function NewsCard({
+function NewsCard({
   title, date, imageLink, storyLink
 }: {
   title: string,
@@ -27,6 +28,7 @@ export default function NewsCard({
               <StyledImage
                 source={{ uri: imageLink }}
                 className="size-20 rounded-lg"
+                cachePolicy="memory"
               />
             </View>
           )}
@@ -47,3 +49,5 @@ export default function NewsCard({
     </PressableFeedback>
   );
 }
+
+export default memo(NewsCard);

@@ -1,18 +1,16 @@
 import NewsCard from '@/components/news/news-card';
 import NewsCardSkeleton from '@/components/news/news-card-skeleton';
+import { useErrorToast } from '@/hooks/use-error-toast';
 import { $api } from '@/network/client';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useHeaderHeight } from '@react-navigation/elements';
-import { useToast } from 'heroui-native';
 import { useEffect } from 'react';
 import { Platform, ScrollView, Text, View } from 'react-native';
 import { withUniwind } from 'uniwind';
 
-const StyledIonicons = withUniwind(Ionicons);
-
 export default function NewsScreen() {
   const headerHeight = useHeaderHeight();
-  const { toast } = useToast();
+  const { showErrorToast } = useErrorToast();
 
   const { data, error } = $api.useQuery(
     'get',
@@ -25,15 +23,10 @@ export default function NewsScreen() {
     if (error) {
       console.log(error);
 
-      toast.show({
-        variant: 'danger',
-        label: 'Error fetching news',
-        description: 'Please try again later.',
-        duration: 'persistent',
-        placement: 'bottom',
-        actionLabel: 'Close',
-        onActionPress: ({ hide }) => hide(),
-      });
+      showErrorToast(
+        'Error fetching news',
+        'Please try again later.',
+      );
     }
   }, [error]);
 

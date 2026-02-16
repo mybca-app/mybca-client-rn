@@ -1,8 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { Button, Card, Chip, PressableFeedback } from 'heroui-native';
+import { memo } from 'react';
 
-export default function BusCard({
+function BusCard({
   busName, busPosition, isFavorite, onToggleFavorite
 }: {
   busName: string,
@@ -54,3 +55,5 @@ export default function BusCard({
     </PressableFeedback>
   );
 }
+
+export default memo(BusCard);

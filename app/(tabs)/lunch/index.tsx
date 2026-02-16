@@ -1,11 +1,11 @@
 import DatePicker from '@/components/lunch/date-picker';
 import LunchItem from '@/components/lunch/lunch-item';
 import NoLunchToday from '@/components/lunch/no-lunch-today';
+import { useErrorToast } from '@/hooks/use-error-toast';
 import { $api } from '@/network/client';
 import { components } from '@/network/openapi/v1';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useHeaderHeight } from '@react-navigation/elements';
-import { useToast } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import { Platform, ScrollView, Text, View } from 'react-native';
 import { withUniwind } from 'uniwind';
@@ -25,7 +25,7 @@ function dateToYYYYMMDD(date: Date) {
 
 export default function LunchScreen() {
   const headerHeight = useHeaderHeight();
-  const { toast } = useToast();
+  const { showErrorToast } = useErrorToast();
   const [date, setDate] = useState(new Date());
   const [menu, setMenu] = useState<components["schemas"]["MenuDayDto"] | null>(null);
   const [dateStartBound, setDateStartBound] = useState<Date | null>();
@@ -42,15 +42,10 @@ export default function LunchScreen() {
     if (error) {
       console.log(error);
 
-      toast.show({
-        variant: 'danger',
-        label: 'Error fetching lunch',
-        description: 'Please try again later.',
-        duration: 'persistent',
-        placement: 'bottom',
-        actionLabel: 'Close',
-        onActionPress: ({ hide }) => hide(),
-      });
+      showErrorToast(
+        'Error fetching lunch',
+        'Please try again later.',
+      );
     }
   }, [error]);
 
@@ -90,12 +85,15 @@ export default function LunchScreen() {
         <Text className="text-foreground mb-2">
           Lunch menus are subject to change and may be inaccurate.
         </Text>
-        <DatePicker
-          startDate={new Date(2026, 1, 9)}
-          endDate={new Date(2026, 1, 13)}
-          selectedDate={date}
-          setSelectedDate={setDate}
-        />
+        {dateStartBound && dateEndBound && (
+          <DatePicker
+            startDate={dateStartBound}
+            endDate={dateEndBound}
+            selectedDate={date}
+            setSelectedDate={setDate}
+          />
+        )}
+        {!menu && <NoLunchToday />}
         {menu && (
           menu.menuItems.length === 0 ? <NoLunchToday /> : (
             menu?.menuItems

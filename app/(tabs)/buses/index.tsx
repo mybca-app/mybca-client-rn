@@ -1,12 +1,14 @@
 import BusCard from '@/components/buses/bus-card';
 import BusCardSkeleton from '@/components/buses/bus-card-skeleton';
+import { requestNotifsPermission } from '@/helpers/notif-permissions';
+import { subscribeToBus, unsubscribeFromBus } from '@/helpers/notif-subscribe';
+import { useErrorToast } from '@/hooks/use-error-toast';
 import { useFavoriteBuses } from '@/hooks/use-favorite-buses';
 import { $api } from '@/network/client';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useHeaderHeight } from '@react-navigation/elements';
 import * as Haptics from 'expo-haptics';
-import { Stack } from 'expo-router';
-import { Button, Input, Select, TextField, useToast } from 'heroui-native';
+import { Button, Input, Select, TextField } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import { Platform, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { withUniwind } from 'uniwind';
@@ -31,7 +33,7 @@ export default function BusesScreen() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [refreshing, setRefreshing] = useState(false);
   const { favorites, toggleFavorite, isFavorite } = useFavoriteBuses();
-  const { toast } = useToast();
+  const { showErrorToast } = useErrorToast();
 
   const { data, error, isLoading, refetch } = $api.useQuery(
     'get',
@@ -65,22 +67,27 @@ export default function BusesScreen() {
 
   const onToggleFavorite = async (bus: string) => {
     await Haptics.impactAsync();
+    
+    const wasFavorite = isFavorite(bus);
     await toggleFavorite(bus);
+
+    if (await requestNotifsPermission()) {
+      if (wasFavorite) {
+        await unsubscribeFromBus(bus);
+      } else {
+        await subscribeToBus(bus);
+      }
+    }
   };
 
   useEffect(() => {
     if (error) {
       console.log(error);
 
-      toast.show({
-        variant: 'danger',
-        label: 'Error fetching bus info',
-        description: 'Click the button on the top right to access the bus spreadsheet, or try again later.',
-        duration: 'persistent',
-        placement: 'bottom',
-        actionLabel: 'Close',
-        onActionPress: ({ hide }) => hide(),
-      })
+      showErrorToast(
+        'Error fetching bus info',
+        'Click the button on the top right to access the bus spreadsheet, or try again later.',
+      );
     }
   }, [error]);
 

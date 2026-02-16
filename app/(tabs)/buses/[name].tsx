@@ -3,7 +3,7 @@ import BusInfoCard from '@/components/buses/bus-info-card';
 import { $api } from '@/network/client';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { FlatList, Platform, ScrollView, Text, View } from 'react-native';
+import { Platform, ScrollView, Text, View } from 'react-native';
 
 export default function BusDetailScreen() {
   const headerHeight = useHeaderHeight();
@@ -12,13 +12,15 @@ export default function BusDetailScreen() {
   const { data: infoData, error: infoError, isLoading: infoIsLoading } = $api.useQuery(
     'get',
     '/api/buses/info',
-    { params: { query: { bus: bus } } }
+    { params: { query: { bus: bus } } },
+    { enabled: !!bus }
   );
 
   const { data: arrivalData, error: arrivalError, isLoading: arrivalIsLoading } = $api.useQuery(
     'get',
     '/api/buses/history',
-    { params: { query: { bus: bus } } }
+    { params: { query: { bus: bus } } },
+    { enabled: !!bus }
   );
 
   return (
@@ -53,6 +55,10 @@ export default function BusDetailScreen() {
             Arrival History
           </Text>
 
+          {!arrivalData && (
+            new Array(20).fill('').map((_, index) => <ArrivalListItem key={index} isLoading />)
+          )}
+
           {arrivalData && arrivalData.length > 0 && arrivalData.map(item => {
             const arrivalText = item.arrivalTime ?? '';
 
@@ -62,6 +68,7 @@ export default function BusDetailScreen() {
                 busName={item.busName ?? ''}
                 busPosition={item.busPosition ?? ''}
                 arrivalTime={new Date(arrivalText.endsWith('Z') ? arrivalText : arrivalText + 'Z')}
+                isLoading={false}
               />);
           })}
         </View>
