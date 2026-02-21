@@ -9,9 +9,11 @@ const StyledIonicons = withUniwind(Ionicons);
 export default function LinkCard({
   name,
   destination,
+  icon = 'link'
 }: {
   name: string
   destination: string,
+  icon?: React.ComponentProps<typeof Ionicons>['name'];
 }) {
   return (
     <PressableFeedback onPress={async () => {
@@ -20,7 +22,7 @@ export default function LinkCard({
       <Card className="w-full">
         <Card.Body className="flex-row gap-4">
           <View className="justify-center">
-            <StyledIonicons name="link" size={24} className="text-accent" />
+            <StyledIonicons name={icon} size={24} className="text-accent" />
           </View>
           <View className="justify-center flex-1 overflow-hidden">
             <Card.Title

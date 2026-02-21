@@ -20,7 +20,7 @@
 
   @variant light {
     --background: rgb(255 254 240);
-    --accent: rgb(243, 202, 64);
+    --accent: rgb(227, 187, 54);
     --accent-foreground: rgb(10, 16, 29);
 
     --surface: rgb(244 239 222);

@@ -18,6 +18,7 @@ export default function SectionNews({
     <View className="flex flex-col gap-2">
       <View className="flex flex-row items-center">
         <Text className="text-base text-muted grow">
+          <StyledIonicons name="newspaper" size={14} />&nbsp;
           In the <Text className="italic">Academy Chronicle</Text>
         </Text>
         <Button variant="outline" size="sm" onPress={() => router.navigate('/news')}>

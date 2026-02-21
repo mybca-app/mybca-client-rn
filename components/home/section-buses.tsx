@@ -25,6 +25,7 @@ export default function SectionBuses({ busMap }: {
     <View className="flex flex-col gap-2">
       <View className="flex flex-row items-center">
         <Text className="text-base text-muted grow">
+          <Ionicons name="bus" size={14} />&nbsp;
           Starred Buses
         </Text>
         <Button variant="outline" size="sm" onPress={() => router.navigate('/buses')}>

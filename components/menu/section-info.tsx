@@ -1,0 +1,20 @@
+import { Text, View } from 'react-native';
+import InfoItem from './info-item';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+export default function SectionInfo() {
+  return (
+    <View className="flex flex-col gap-2">
+      <View className="flex flex-row items-center">
+        <Text className="text-base text-muted grow">
+          <Ionicons name="information-circle-outline" size={14} />&nbsp;
+          About myBCA
+        </Text>
+      </View>
+      <View className="flex flex-col">
+        <InfoItem name="Developer" value="Thomas Torossian" />
+        <InfoItem name="License" value="AGPL v3.0 or later" />
+      </View>
+    </View>
+  );
+}

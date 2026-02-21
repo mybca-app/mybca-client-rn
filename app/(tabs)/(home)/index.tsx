@@ -89,7 +89,7 @@ export default function HomeScreen() {
           console.log(res);
         }}
       />
-      <View className="flex flex-col gap-8">
+      <View className="flex flex-col gap-8 -mt-4">
         <HomeHeader />
         {scheduleData?.schedule && <SectionSchedule schedule={scheduleData.schedule} />}
         <SectionBuses busMap={busData?.data ?? {}} />

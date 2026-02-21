@@ -2,7 +2,7 @@ import { Icon, Label, NativeTabs, VectorIcon } from 'expo-router/unstable-native
 import React from 'react';
 import MIcons from '@expo/vector-icons/MaterialIcons';
 
-import { DynamicColorIOS, PlatformColor, useColorScheme } from 'react-native';
+import { DynamicColorIOS, Platform, PlatformColor, useColorScheme } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -12,9 +12,9 @@ export default function TabLayout() {
       /*tintColor="rgb(242, 203, 64)"*/
       minimizeBehavior="onScrollDown"
       backgroundColor={colorScheme === 'dark' ? 'rgb(20 29 49)' : 'rgb(244 239 222)'}
-      tintColor={colorScheme === 'dark' ? 'rgb(243 202 64)' : 'rgb(61, 50, 16)'}
       iconColor={colorScheme === 'dark' ? '#fff' : 'rgb(61, 50, 16)'}
-      indicatorColor={colorScheme === 'dark' ? 'rgb(28 38 60)' : 'rgb(235, 206, 117)'}
+      tintColor="rgb(212, 173, 47)"
+      indicatorColor={colorScheme === 'dark' ? 'rgb(28 38 60)' : 'rgb(235, 228, 204)'}
     >
       <NativeTabs.Trigger name="(home)">
         <Label>Home</Label>
@@ -31,6 +31,10 @@ export default function TabLayout() {
       <NativeTabs.Trigger name="news">
         <Icon sf="newspaper.fill" androidSrc={<VectorIcon family={MIcons} name="newspaper" />} />
         <Label>News</Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="menu">
+        <Icon sf="line.3.horizontal" androidSrc={<VectorIcon family={MIcons} name="menu" />} />
+        <Label>Menu</Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );
