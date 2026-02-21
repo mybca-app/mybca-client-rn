@@ -74,7 +74,6 @@ export default function HomeScreen() {
     <ScrollView
       contentContainerStyle={{
         padding: 16,
-        paddingTop: (Platform.OS === 'web' ? headerHeight : 0),
       }}
       contentInsetAdjustmentBehavior="automatic"
       className="bg-background"

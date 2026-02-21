@@ -1,19 +1,30 @@
+import { useHeaderColor } from '@/hooks/use-header-color';
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
+import { Platform, View } from 'react-native';
 
 export default function HomeScreenLayout() {
+  const { background, foreground } = useHeaderColor();
+
   return (
     <Stack>
       <Stack.Screen
         name="index"
         options={{
           headerTitle: () => (
-            <Image
-              source={require('../../../assets/images/logo.svg')}
-              style={{ width: 50, height: 40, resizeMode: 'contain' }}
-            />
+            <View style={{ margin: 'auto' }}>
+              <Image
+                source={require('../../../assets/images/logo.svg')}
+                style={{ width: 50, height: 40, resizeMode: 'contain' }}
+              />
+            </View>
           ),
-          headerTransparent: true,
+          headerStyle: {
+            backgroundColor: background,
+          },
+          headerTransparent: Platform.OS === 'ios',
+          headerTintColor: foreground,
+          headerShadowVisible: false,
           headerShown: true
         }}
       />

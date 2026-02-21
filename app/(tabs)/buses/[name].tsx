@@ -1,5 +1,6 @@
 import ArrivalListItem from '@/components/buses/arrival-list-item';
 import BusInfoCard from '@/components/buses/bus-info-card';
+import { useHeaderColor } from '@/hooks/use-header-color';
 import { $api } from '@/network/client';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { Stack, useLocalSearchParams } from 'expo-router';
@@ -7,6 +8,7 @@ import { Platform, ScrollView, Text, View } from 'react-native';
 
 export default function BusDetailScreen() {
   const headerHeight = useHeaderHeight();
+  const { background, foreground } = useHeaderColor();
   const { name: bus } = useLocalSearchParams<{ name: string }>();
 
   const { data: infoData, error: infoError, isLoading: infoIsLoading } = $api.useQuery(
@@ -28,14 +30,17 @@ export default function BusDetailScreen() {
       <Stack.Screen
         options={{
           title: bus ? `${bus}` : 'Bus',
-          headerTransparent: true,
+          headerStyle: {
+            backgroundColor: background,
+          },
+          headerTintColor: foreground,
+          headerTransparent: Platform.OS === 'ios',
         }}
       />
       <ScrollView
         className="bg-background"
         contentContainerStyle={{
           padding: 16,
-          paddingTop: (Platform.OS === 'web' ? headerHeight : 0) + 16,
         }}
         contentInsetAdjustmentBehavior="automatic"
       >

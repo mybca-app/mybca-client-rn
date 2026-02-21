@@ -39,7 +39,9 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "link.mybca.mobileclient",
+      "googleServicesFile": "firebase/google-services.json"
     },
     "web": {
       "output": "static",

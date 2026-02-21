@@ -96,7 +96,6 @@ export default function BusesScreen() {
       className="bg-background"
       contentContainerStyle={{
         padding: 16,
-        paddingTop: (Platform.OS === 'web' ? headerHeight : 0) + 16,
       }}
       contentInsetAdjustmentBehavior="automatic"
       refreshControl={

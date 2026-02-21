@@ -77,7 +77,6 @@ export default function LunchScreen() {
       className="bg-background"
       contentContainerStyle={{
         padding: 16,
-        paddingTop: (Platform.OS === 'web' ? headerHeight : 0) + 16,
       }}
       contentInsetAdjustmentBehavior="automatic"
     >
