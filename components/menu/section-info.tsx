@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
 import InfoItem from './info-item';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { version } from '@/package.json';
 
 export default function SectionInfo() {
   return (
@@ -14,6 +15,7 @@ export default function SectionInfo() {
       <View className="flex flex-col">
         <InfoItem name="Developer" value="Thomas Torossian" />
         <InfoItem name="License" value="AGPL v3.0 or later" />
+        <InfoItem name="Version" value={version} />
       </View>
     </View>
   );

@@ -7,22 +7,17 @@ import { useErrorToast } from '@/hooks/use-error-toast';
 import { useFavoriteBuses } from '@/hooks/use-favorite-buses';
 import { $api } from '@/network/client';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useHeaderHeight } from '@react-navigation/elements';
 import * as Haptics from 'expo-haptics';
 import { Stack } from 'expo-router';
-import { Button, Input, SearchField, Select, TextField } from 'heroui-native';
+import { Button, SearchField, Select } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import {
-  Platform,
   RefreshControl,
   ScrollView,
   Text,
   useColorScheme,
   View,
 } from 'react-native';
-import { withUniwind } from 'uniwind';
-
-const StyledIonicons = withUniwind(Ionicons);
 
 type BusScreenFilter = {
   value: string;
