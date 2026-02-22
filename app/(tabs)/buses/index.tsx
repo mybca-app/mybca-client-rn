@@ -10,7 +10,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useHeaderHeight } from '@react-navigation/elements';
 import * as Haptics from 'expo-haptics';
 import { Stack } from 'expo-router';
-import { Button, Input, Select, TextField } from 'heroui-native';
+import { Button, Input, SearchField, Select, TextField } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import {
   Platform,
@@ -136,22 +136,17 @@ export default function BusesScreen() {
       >
         <View className="flex gap-2">
           <View className="flex-row gap-2 items-center">
-            <TextField className="grow">
-              <View className="flex-row items-center">
-                <Input
-                  placeholder="Search..."
-                  className="flex-1 px-10"
-                  value={searchQuery}
-                  onChangeText={setSearchQuery}
-                />
-                <StyledIonicons
-                  name="search"
-                  size={16}
-                  className="absolute left-3.5 text-muted"
-                  pointerEvents="none"
-                />
-              </View>
-            </TextField>
+            <SearchField
+              value={searchQuery}
+              onChange={setSearchQuery}
+              className="grow"
+            >
+              <SearchField.Group>
+                <SearchField.SearchIcon />
+                <SearchField.Input />
+                <SearchField.ClearButton />
+              </SearchField.Group>
+            </SearchField>
             <View>
               <Select
                 value={activeFilter}
