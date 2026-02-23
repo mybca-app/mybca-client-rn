@@ -5,7 +5,7 @@ import SectionInfo from '@/components/menu/section-info';
 import SectionSupport from '@/components/menu/section-support';
 import { ScrollView, View } from 'react-native';
 
-export default function MenuScreen({}: {}) {
+export default function MenuScreen() {
   return (
     <ScrollView
       className="bg-background"

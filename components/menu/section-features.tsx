@@ -28,7 +28,13 @@ export default function SectionFeatures() {
           icon="newspaper"
           color="rgb(54, 94, 227)"
           text="News"
-          href="/news"
+          href="/menu/(news)"
+        />
+        <FeatureIcon
+          icon="calendar"
+          color="rgb(40, 173, 71)"
+          text="Events"
+          href="/menu/(events)"
         />
       </View>
     </View>

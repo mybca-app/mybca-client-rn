@@ -46,19 +46,12 @@ export default function TabLayout() {
         />
         <Label>Lunch</Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="news">
-        <Icon
-          sf="newspaper.fill"
-          androidSrc={<VectorIcon family={MIcons} name="newspaper" />}
-        />
-        <Label>News</Label>
-      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="menu">
         <Icon
-          sf="line.3.horizontal"
+          sf="ellipsis"
           androidSrc={<VectorIcon family={MIcons} name="menu" />}
         />
-        <Label>Menu</Label>
+        <Label>More</Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );

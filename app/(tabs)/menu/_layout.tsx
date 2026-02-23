@@ -7,10 +7,17 @@ export default function MenuScreenLayout() {
   const { background, foreground } = useHeaderColor();
 
   return (
-    <Stack>
+    <Stack screenOptions={{
+      headerStyle: {
+        backgroundColor: background,
+      },
+      headerTransparent: Platform.OS === 'ios',
+      headerTintColor: foreground,
+    }}>
       <Stack.Screen
         name="index"
         options={{
+          title: 'Menu',
           headerTitle: () => (
             <View style={{ margin: 'auto' }}>
               <Image
@@ -19,13 +26,7 @@ export default function MenuScreenLayout() {
               />
             </View>
           ),
-          headerStyle: {
-            backgroundColor: background,
-          },
-          headerTransparent: Platform.OS === 'ios',
-          headerTintColor: foreground,
           headerShadowVisible: false,
-          headerShown: true,
         }}
       />
     </Stack>
