@@ -1,15 +1,13 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import * as WebBrowser from 'expo-web-browser';
 import {
   BottomSheet,
-  Button,
   ListGroup,
   PressableFeedback,
   Separator,
 } from 'heroui-native';
 import { View } from 'react-native';
 import { withUniwind } from 'uniwind';
-import * as WebBrowser from 'expo-web-browser';
 
 const StyledIonicons = withUniwind(Ionicons);
 

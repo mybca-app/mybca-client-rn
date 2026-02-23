@@ -7,5 +7,5 @@ export default function MenuHeader() {
         Welcome to myBCA
       </Text>
     </View>
-  )
+  );
 }

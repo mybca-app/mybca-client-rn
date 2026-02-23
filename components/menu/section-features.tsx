@@ -1,14 +1,14 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Text, View } from 'react-native';
 import FeatureIcon from './feature-icon';
-import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function SectionFeatures() {
   return (
     <View className="flex flex-col gap-2">
       <View className="flex flex-row items-center">
         <Text className="text-base text-muted grow">
-          <Ionicons name="star" size={14} />&nbsp;
-          Features
+          <Ionicons name="star" size={14} />
+          &nbsp; Features
         </Text>
       </View>
       <View className="flex flex-row mt-3 gap-5">

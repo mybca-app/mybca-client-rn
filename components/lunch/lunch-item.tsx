@@ -1,20 +1,15 @@
-import { components } from "@/network/openapi/v1";
-import LunchHeader from "./lunch-header";
-import LunchFoodCard from "./lunch-food-card";
-import LunchBottomSheet from "./lunch-bottom-sheet";
+import { components } from '@/network/openapi/v1';
+import LunchBottomSheet from './lunch-bottom-sheet';
+import LunchHeader from './lunch-header';
 
 export default function LunchItem({
-  item
+  item,
 }: {
-  item: components['schemas']['MenuItemDto']
+  item: components['schemas']['MenuItemDto'];
 }) {
   if (item.isStationHeader && item.text) {
-    return <LunchHeader text={item.text} />
+    return <LunchHeader text={item.text} />;
   }
 
-  return (
-    <LunchBottomSheet
-      item={item.food}
-    />
-  )
+  return <LunchBottomSheet item={item.food} />;
 }

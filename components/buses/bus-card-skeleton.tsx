@@ -1,11 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Button, Card, SkeletonGroup } from 'heroui-native';
 
-export default function BusCardSkeleton({
-  showStar
-}: {
-  showStar: boolean
-}) {
+export default function BusCardSkeleton({ showStar }: { showStar: boolean }) {
   return (
     <SkeletonGroup>
       <Card className="flex-row gap-2 w-full overflow-hidden">
@@ -20,14 +16,18 @@ export default function BusCardSkeleton({
         )}
 
         <Card.Body className="flex-1 overflow-hidden justify-center">
-          <Card.Title
-            className="mb-1"
-          >
-            <SkeletonGroup.Item variant="shimmer" className="h-6 w-50 rounded" />
+          <Card.Title className="mb-1">
+            <SkeletonGroup.Item
+              variant="shimmer"
+              className="h-6 w-50 rounded"
+            />
           </Card.Title>
 
           <Card.Description>
-            <SkeletonGroup.Item variant="shimmer" className="h-4 w-30 rounded" />
+            <SkeletonGroup.Item
+              variant="shimmer"
+              className="h-4 w-30 rounded"
+            />
           </Card.Description>
         </Card.Body>
 

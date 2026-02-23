@@ -12,9 +12,9 @@ function LunchFoodCard({
   imageUrl,
   ...props
 }: {
-  name: string
-  description?: string | null,
-  imageUrl?: string | null,
+  name: string;
+  description?: string | null;
+  imageUrl?: string | null;
 } & React.ComponentProps<typeof Pressable>) {
   return (
     <PressableFeedback {...props}>
@@ -30,23 +30,16 @@ function LunchFoodCard({
             </View>
           )}
           <View className="justify-center flex-1 overflow-hidden">
-            <Card.Title
-              ellipsizeMode="tail"
-              className="mb-1 flex-wrap"
-            >
+            <Card.Title ellipsizeMode="tail" className="mb-1 flex-wrap">
               {name}
             </Card.Title>
 
-            {description && (
-              <Card.Description>
-                {description}
-              </Card.Description>
-            )}
+            {description && <Card.Description>{description}</Card.Description>}
           </View>
         </Card.Body>
       </Card>
     </PressableFeedback>
-  )
+  );
 }
 
 export default memo(LunchFoodCard);

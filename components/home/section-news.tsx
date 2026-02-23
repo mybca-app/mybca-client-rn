@@ -1,34 +1,40 @@
-import { components } from "@/network/openapi/v1";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { router } from "expo-router";
-import { Button } from "heroui-native";
-import { Text, View } from "react-native";
-import { withUniwind } from "uniwind";
-import NewsCardSkeleton from "../news/news-card-skeleton";
-import NewsCard from "../news/news-card";
+import { components } from '@/network/openapi/v1';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
+import { Button } from 'heroui-native';
+import { Text, View } from 'react-native';
+import { withUniwind } from 'uniwind';
+import NewsCard from '../news/news-card';
+import NewsCardSkeleton from '../news/news-card-skeleton';
 
 const StyledIonicons = withUniwind(Ionicons);
 
 export default function SectionNews({
-  story
+  story,
 }: {
-  story?: components['schemas']['NewsStoryDto'] | null,
+  story?: components['schemas']['NewsStoryDto'] | null;
 }) {
   return (
     <View className="flex flex-col gap-2">
       <View className="flex flex-row items-center">
         <Text className="text-base text-muted grow">
-          <StyledIonicons name="newspaper" size={14} />&nbsp;
-          In the <Text className="italic">Academy Chronicle</Text>
+          <StyledIonicons name="newspaper" size={14} />
+          &nbsp; In the <Text className="italic">Academy Chronicle</Text>
         </Text>
-        <Button variant="outline" size="sm" onPress={() => router.navigate('/news')}>
-          <Button.Label className="text-foreground">
-            All News
-          </Button.Label>
-          <StyledIonicons name="arrow-forward" className="text-foreground" size={18} />
+        <Button
+          variant="outline"
+          size="sm"
+          onPress={() => router.navigate('/news')}
+        >
+          <Button.Label className="text-foreground">All News</Button.Label>
+          <StyledIonicons
+            name="arrow-forward"
+            className="text-foreground"
+            size={18}
+          />
         </Button>
       </View>
-      
+
       {story ? (
         <NewsCard
           key={story.id}
@@ -37,7 +43,9 @@ export default function SectionNews({
           storyLink={story.link}
           imageLink={story.imageLink}
         />
-      ) : <NewsCardSkeleton />}
+      ) : (
+        <NewsCardSkeleton />
+      )}
     </View>
   );
 }

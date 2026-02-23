@@ -6,8 +6,8 @@ export default function SectionAccount() {
     <View className="flex flex-col gap-2">
       <View className="flex flex-row items-center">
         <Text className="text-base text-muted grow">
-          <Ionicons name="person" size={14} />&nbsp;
-          Account
+          <Ionicons name="person" size={14} />
+          &nbsp; Account
         </Text>
       </View>
       <View className="flex flex-col">

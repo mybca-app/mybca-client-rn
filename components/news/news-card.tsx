@@ -8,19 +8,24 @@ import { withUniwind } from 'uniwind';
 const StyledImage = withUniwind(Image);
 
 function NewsCard({
-  title, date, imageLink, storyLink
+  title,
+  date,
+  imageLink,
+  storyLink,
 }: {
-  title: string,
-  date: Date,
-  imageLink?: string | null,
-  storyLink?: string | null,
+  title: string;
+  date: Date;
+  imageLink?: string | null;
+  storyLink?: string | null;
 }) {
   return (
-    <PressableFeedback onPress={async () => {
-      if (storyLink) {
-        await WebBrowser.openBrowserAsync(storyLink);
-      }
-    }}>
+    <PressableFeedback
+      onPress={async () => {
+        if (storyLink) {
+          await WebBrowser.openBrowserAsync(storyLink);
+        }
+      }}
+    >
       <Card className="w-full">
         <Card.Body className="flex-row gap-4">
           {imageLink && (
@@ -33,16 +38,11 @@ function NewsCard({
             </View>
           )}
           <View className="justify-center flex-1 overflow-hidden">
-            <Card.Title
-              ellipsizeMode="tail"
-              className="mb-1 flex-wrap"
-            >
+            <Card.Title ellipsizeMode="tail" className="mb-1 flex-wrap">
               {title}
             </Card.Title>
 
-            <Card.Description>
-              {date.toLocaleDateString()}
-            </Card.Description>
+            <Card.Description>{date.toLocaleDateString()}</Card.Description>
           </View>
         </Card.Body>
       </Card>

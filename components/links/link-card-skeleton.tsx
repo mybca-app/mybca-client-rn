@@ -1,6 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as Linking from 'expo-linking';
-import { Card, PressableFeedback, Skeleton } from 'heroui-native';
+import { Card, Skeleton } from 'heroui-native';
 import { View } from 'react-native';
 import { withUniwind } from 'uniwind';
 
@@ -14,14 +13,11 @@ export default function LinkCardSkeleton() {
           <StyledIonicons name="link" size={24} className="text-accent" />
         </View>
         <View className="justify-center flex-1 overflow-hidden">
-          <Card.Title
-            ellipsizeMode="tail"
-            className="flex-wrap"
-          >
+          <Card.Title ellipsizeMode="tail" className="flex-wrap">
             <Skeleton className="w-36 h-6 rounded" />
           </Card.Title>
         </View>
       </Card.Body>
     </Card>
-  )
+  );
 }

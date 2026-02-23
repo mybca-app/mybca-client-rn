@@ -9,7 +9,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "api-types-update": "openapi-typescript https://services.mybca.link/openapi/v1.json -o ./network/openapi/v1.d.ts"
+    "api-types-update": "openapi-typescript https://services.mybca.link/openapi/v1.json -o ./network/openapi/v1.d.ts",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -60,6 +61,8 @@
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
     "openapi-typescript": "^7.10.1",
+    "prettier": "^3.8.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~5.9.2"
   },
   "private": true

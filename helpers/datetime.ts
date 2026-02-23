@@ -27,6 +27,6 @@ export function formatTimeByLocale(time: string): string {
 
   return new Intl.DateTimeFormat(undefined, {
     hour: 'numeric',
-    minute: '2-digit'
+    minute: '2-digit',
   }).format(date);
 }

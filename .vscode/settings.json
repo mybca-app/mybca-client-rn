@@ -34,8 +34,6 @@
     "ListFooterComponentClassName",
     "ListHeaderComponentClassName"
   ],
-  "tailwindCSS.classFunctions": [
-    "useResolveClassNames"
-  ],
+  "tailwindCSS.classFunctions": ["useResolveClassNames"],
   "editor.tabSize": 2
 }

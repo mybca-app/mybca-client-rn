@@ -26,11 +26,11 @@ export function useFavoriteBuses() {
   const toggleFavorite = useCallback(async (busId: string) => {
     setFavorites((current) => {
       const updated = current.includes(busId)
-        ? current.filter(id => id !== busId)
+        ? current.filter((id) => id !== busId)
         : [...current, busId];
 
-      AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(updated)).catch(e =>
-        console.error('Failed to save favorites', e)
+      AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(updated)).catch((e) =>
+        console.error('Failed to save favorites', e),
       );
 
       return updated;
@@ -39,8 +39,14 @@ export function useFavoriteBuses() {
 
   const isFavorite = useCallback(
     (busId: string) => favorites.includes(busId),
-    [favorites]
+    [favorites],
   );
 
-  return { favorites, toggleFavorite, isFavorite, loading, refetch: loadFavorites };
+  return {
+    favorites,
+    toggleFavorite,
+    isFavorite,
+    loading,
+    refetch: loadFavorites,
+  };
 }

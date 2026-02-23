@@ -8,12 +8,10 @@ import { formatLocalDate } from '@/helpers/datetime';
 import { requestNotifsPermission } from '@/helpers/notif-permissions';
 import { $api } from '@/network/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getApp } from '@react-native-firebase/app';
-import { getAPNSToken, getMessaging, getToken } from '@react-native-firebase/messaging';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useFocusEffect } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { Platform, RefreshControl, ScrollView, View } from 'react-native';
+import { useState } from 'react';
+import { RefreshControl, ScrollView, View } from 'react-native';
 
 const HAS_PROMPTED_BUS_NOTIFS_KEY = '@has_prompted_bus_notifs';
 
@@ -22,29 +20,31 @@ export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [isNotifPromptSheetOpen, setIsNotifPromptSheetOpen] = useState(false);
 
-  const { data: scheduleData, error: scheduleError, refetch: scheduleRefetch } = $api.useQuery(
-    'get',
-    '/api/schedules/{date}',
-    { params: { path: { date: formatLocalDate() } } }
-  );
+  const {
+    data: scheduleData,
+    error: scheduleError,
+    refetch: scheduleRefetch,
+  } = $api.useQuery('get', '/api/schedules/{date}', {
+    params: { path: { date: formatLocalDate() } },
+  });
 
-  const { data: busData, error: busError, refetch: busRefetch } = $api.useQuery(
-    'get',
-    '/api/buses',
-    {}
-  );
+  const {
+    data: busData,
+    error: busError,
+    refetch: busRefetch,
+  } = $api.useQuery('get', '/api/buses', {});
 
-  const { data: newsData, error: newsError, refetch: newsRefetch } = $api.useQuery(
-    'get',
-    '/api/news/stories/latest',
-    {}
-  );
+  const {
+    data: newsData,
+    error: newsError,
+    refetch: newsRefetch,
+  } = $api.useQuery('get', '/api/news/stories/latest', {});
 
-  const { data: linksData, error: linksError, refetch: linksRefetch } = $api.useQuery(
-    'get',
-    '/api/links',
-    {}
-  );
+  const {
+    data: linksData,
+    error: linksError,
+    refetch: linksRefetch,
+  } = $api.useQuery('get', '/api/links', {});
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -91,7 +91,9 @@ export default function HomeScreen() {
       />
       <View className="flex flex-col gap-8 -mt-4">
         <HomeHeader />
-        {scheduleData?.schedule && <SectionSchedule schedule={scheduleData.schedule} />}
+        {scheduleData?.schedule && (
+          <SectionSchedule schedule={scheduleData.schedule} />
+        )}
         <SectionBuses busMap={busData?.data ?? {}} />
         <SectionNews story={newsData?.data} />
         <SectionLinks links={linksData?.data} />

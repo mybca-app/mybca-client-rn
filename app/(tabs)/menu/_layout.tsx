@@ -25,7 +25,7 @@ export default function MenuScreenLayout() {
           headerTransparent: Platform.OS === 'ios',
           headerTintColor: foreground,
           headerShadowVisible: false,
-          headerShown: true
+          headerShown: true,
         }}
       />
     </Stack>

@@ -1,15 +1,15 @@
-import { Separator, SkeletonGroup } from "heroui-native";
-import { Text, View } from "react-native";
+import { Separator, SkeletonGroup } from 'heroui-native';
+import { Text, View } from 'react-native';
 
 export default function ArrivalListItem({
   busPosition,
   arrivalTime,
-  isLoading
+  isLoading,
 }: {
-  busName?: string,
-  busPosition?: string,
-  arrivalTime?: Date,
-  isLoading: boolean,
+  busName?: string;
+  busPosition?: string;
+  arrivalTime?: Date;
+  isLoading: boolean;
 }) {
   return (
     <SkeletonGroup isLoading={isLoading}>
@@ -33,5 +33,5 @@ export default function ArrivalListItem({
         <Separator />
       </View>
     </SkeletonGroup>
-  )
+  );
 }

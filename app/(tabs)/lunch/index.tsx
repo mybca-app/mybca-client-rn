@@ -7,7 +7,7 @@ import { components } from '@/network/openapi/v1';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useEffect, useState } from 'react';
-import { Platform, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { withUniwind } from 'uniwind';
 
 const StyledIonicons = withUniwind(Ionicons);
@@ -27,14 +27,16 @@ export default function LunchScreen() {
   const headerHeight = useHeaderHeight();
   const { showErrorToast } = useErrorToast();
   const [date, setDate] = useState(new Date());
-  const [menu, setMenu] = useState<components["schemas"]["MenuDayDto"] | null>(null);
+  const [menu, setMenu] = useState<components['schemas']['MenuDayDto'] | null>(
+    null,
+  );
   const [dateStartBound, setDateStartBound] = useState<Date | null>();
   const [dateEndBound, setDateEndBound] = useState<Date | null>();
 
   const { data, error, isLoading } = $api.useQuery(
     'get',
     '/api/lunch/week',
-    {}
+    {},
   );
   const menuWeek = data?.data;
 
@@ -42,10 +44,7 @@ export default function LunchScreen() {
     if (error) {
       console.log(error);
 
-      showErrorToast(
-        'Error fetching lunch',
-        'Please try again later.',
-      );
+      showErrorToast('Error fetching lunch', 'Please try again later.');
     }
   }, [error]);
 
@@ -60,15 +59,15 @@ export default function LunchScreen() {
     if (data) {
       const days = data?.data?.days || [];
       if (days.length !== 0) {
-        setDateStartBound(new Date(days[0].date ?? ""));
-        setDateEndBound(new Date(days[days.length - 1].date ?? ""));
+        setDateStartBound(new Date(days[0].date ?? ''));
+        setDateEndBound(new Date(days[days.length - 1].date ?? ''));
       }
     }
   }, [data]);
 
   useEffect(() => {
     const days = menuWeek?.days || [];
-    const m = days.find(d => d.date === dateToYYYYMMDD(date)) ?? null;
+    const m = days.find((d) => d.date === dateToYYYYMMDD(date)) ?? null;
     setMenu(m);
   }, [data, date]);
 
@@ -93,13 +92,14 @@ export default function LunchScreen() {
           />
         )}
         {!menu && <NoLunchToday />}
-        {menu && (
-          menu.menuItems.length === 0 ? <NoLunchToday /> : (
+        {menu &&
+          (menu.menuItems.length === 0 ? (
+            <NoLunchToday />
+          ) : (
             menu?.menuItems
               .filter((item) => !UNWANTED_SECTIONS.includes(item.stationID))
-              .map((item, index) => <LunchItem key={index} item={item} />))
-        )}
-
+              .map((item, index) => <LunchItem key={index} item={item} />)
+          ))}
       </View>
     </ScrollView>
   );

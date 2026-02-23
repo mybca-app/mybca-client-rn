@@ -1,8 +1,8 @@
 import { components } from '@/network/openapi/v1';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Text, View } from 'react-native';
 import LinkCard from '../links/link-card';
 import LinkCardSkeleton from '../links/link-card-skeleton';
-import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function SectionLinks({
   links,
@@ -13,8 +13,8 @@ export default function SectionLinks({
     <View className="flex flex-col gap-2">
       <View className="flex flex-row items-center">
         <Text className="text-base text-muted grow">
-          <Ionicons name="link" size={14} />&nbsp;
-          Quick Links
+          <Ionicons name="link" size={14} />
+          &nbsp; Quick Links
         </Text>
       </View>
       {links

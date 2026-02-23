@@ -1,8 +1,8 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Button } from "heroui-native";
-import { useMemo } from "react";
-import { Text, View } from "react-native";
-import { withUniwind } from "uniwind";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { Button } from 'heroui-native';
+import { useMemo } from 'react';
+import { View } from 'react-native';
+import { withUniwind } from 'uniwind';
 
 const StyledIonicons = withUniwind(Ionicons);
 
@@ -12,10 +12,10 @@ export default function DatePicker({
   selectedDate,
   setSelectedDate,
 }: {
-  startDate: Date,
-  endDate: Date,
-  selectedDate: Date,
-  setSelectedDate: (date: Date) => void,
+  startDate: Date;
+  endDate: Date;
+  selectedDate: Date;
+  setSelectedDate: (date: Date) => void;
 }) {
   const normalize = (d: Date) => {
     const x = new Date(d);
@@ -52,18 +52,29 @@ export default function DatePicker({
 
   return (
     <View className="flex flex-row gap-2 items-center">
-      <Button isDisabled={!canPrevious} onPress={previous} isIconOnly variant="outline">
-        <StyledIonicons name="chevron-back-outline" className="text-foreground" size={24} />
+      <Button
+        isDisabled={!canPrevious}
+        onPress={previous}
+        isIconOnly
+        variant="outline"
+      >
+        <StyledIonicons
+          name="chevron-back-outline"
+          className="text-foreground"
+          size={24}
+        />
       </Button>
       <Button variant="tertiary" className="grow">
         <StyledIonicons name="calendar" className="text-foreground" size={18} />
-        <Button.Label>
-          {selectedDate.toLocaleDateString()}
-        </Button.Label>
+        <Button.Label>{selectedDate.toLocaleDateString()}</Button.Label>
       </Button>
       <Button isDisabled={!canNext} onPress={next} isIconOnly variant="outline">
-        <StyledIonicons name="chevron-forward-outline" className="text-foreground" size={24} />
+        <StyledIonicons
+          name="chevron-forward-outline"
+          className="text-foreground"
+          size={24}
+        />
       </Button>
     </View>
-  )
+  );
 }

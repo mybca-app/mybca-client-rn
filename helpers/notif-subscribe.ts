@@ -1,4 +1,8 @@
-import { getMessaging, registerDeviceForRemoteMessages, subscribeToTopic, unsubscribeFromTopic } from '@react-native-firebase/messaging';
+import {
+  getMessaging,
+  subscribeToTopic,
+  unsubscribeFromTopic,
+} from '@react-native-firebase/messaging';
 
 function townToNotifTopic(town: string): string {
   return (

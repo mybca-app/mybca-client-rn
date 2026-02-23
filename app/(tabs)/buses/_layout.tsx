@@ -20,7 +20,11 @@ export default function BusesLayout() {
           headerTransparent: Platform.OS === 'ios',
           headerRight: () => (
             <Button size="sm" isIconOnly variant="ghost">
-              <Ionicons name="information-circle-outline" size={24} color={useColorScheme() === 'dark' ? '#fff' : '#000'} />
+              <Ionicons
+                name="information-circle-outline"
+                size={24}
+                color={useColorScheme() === 'dark' ? '#fff' : '#000'}
+              />
             </Button>
           ),
         }}

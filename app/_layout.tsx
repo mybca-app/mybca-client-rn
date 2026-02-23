@@ -3,12 +3,12 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from '@react-navigation/native';
+import * as QuickActions from 'expo-quick-actions';
+import { RouterAction, useQuickActionRouting } from 'expo-quick-actions/router';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { HeroUINativeProvider } from 'heroui-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { RouterAction, useQuickActionRouting } from 'expo-quick-actions/router';
-import * as QuickActions from 'expo-quick-actions';
 import 'react-native-reanimated';
 import '../global.css';
 

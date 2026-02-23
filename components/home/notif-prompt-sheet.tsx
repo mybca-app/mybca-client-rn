@@ -10,9 +10,9 @@ export default function NotifPromptSheet({
   setIsOpen,
   onConfirm,
 }: {
-  isOpen: boolean,
-  setIsOpen: (open: boolean) => void
-  onConfirm: () => void,
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  onConfirm: () => void;
 }) {
   return (
     <BottomSheet isOpen={isOpen} onOpenChange={setIsOpen}>
@@ -38,10 +38,14 @@ export default function NotifPromptSheet({
             </BottomSheet.Description>
           </View>
           <View className="gap-3">
-            <Button onPress={() => {
-              onConfirm();
-              setIsOpen(false);
-            }}>Enable</Button>
+            <Button
+              onPress={() => {
+                onConfirm();
+                setIsOpen(false);
+              }}
+            >
+              Enable
+            </Button>
             <Button variant="tertiary" onPress={() => setIsOpen(false)}>
               Later
             </Button>
@@ -49,5 +53,5 @@ export default function NotifPromptSheet({
         </BottomSheet.Content>
       </BottomSheet.Portal>
     </BottomSheet>
-  )
+  );
 }
