@@ -2,15 +2,15 @@ import NewsCard from '@/components/news/news-card';
 import NewsCardSkeleton from '@/components/news/news-card-skeleton';
 import { useErrorToast } from '@/hooks/use-error-toast';
 import { $api } from '@/network/client';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useEffect } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 export default function NewsScreen() {
-  const headerHeight = useHeaderHeight();
   const { showErrorToast } = useErrorToast();
 
-  const { data, error } = $api.useQuery('get', '/api/news/stories', {});
+  const { data, error } = $api.useQuery('get', '/api/news/stories', {
+    refetchInterval: 60 * 1000,
+  });
   const stories = data?.data || [];
 
   useEffect(() => {

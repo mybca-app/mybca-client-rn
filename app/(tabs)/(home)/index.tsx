@@ -8,7 +8,6 @@ import { formatLocalDate } from '@/helpers/datetime';
 import { requestNotifsPermission } from '@/helpers/notif-permissions';
 import { $api } from '@/network/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useFocusEffect } from 'expo-router';
 import { useState } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
@@ -16,35 +15,41 @@ import { RefreshControl, ScrollView, View } from 'react-native';
 const HAS_PROMPTED_BUS_NOTIFS_KEY = '@has_prompted_bus_notifs';
 
 export default function HomeScreen() {
-  const headerHeight = useHeaderHeight();
   const [refreshing, setRefreshing] = useState(false);
   const [isNotifPromptSheetOpen, setIsNotifPromptSheetOpen] = useState(false);
 
-  const {
-    data: scheduleData,
-    error: scheduleError,
-    refetch: scheduleRefetch,
-  } = $api.useQuery('get', '/api/schedules/{date}', {
-    params: { path: { date: formatLocalDate() } },
-  });
+  const { data: scheduleData, refetch: scheduleRefetch } = $api.useQuery(
+    'get',
+    '/api/schedules/{date}',
+    {
+      params: { path: { date: formatLocalDate() } },
+      refetchInterval: 60 * 1000,
+    },
+  );
 
-  const {
-    data: busData,
-    error: busError,
-    refetch: busRefetch,
-  } = $api.useQuery('get', '/api/buses', {});
+  const { data: busData, refetch: busRefetch } = $api.useQuery(
+    'get',
+    '/api/buses',
+    {
+      refetchInterval: 60 * 1000,
+    },
+  );
 
-  const {
-    data: newsData,
-    error: newsError,
-    refetch: newsRefetch,
-  } = $api.useQuery('get', '/api/news/stories/latest', {});
+  const { data: newsData, refetch: newsRefetch } = $api.useQuery(
+    'get',
+    '/api/news/stories/latest',
+    {
+      refetchInterval: 60 * 1000,
+    },
+  );
 
-  const {
-    data: linksData,
-    error: linksError,
-    refetch: linksRefetch,
-  } = $api.useQuery('get', '/api/links', {});
+  const { data: linksData, refetch: linksRefetch } = $api.useQuery(
+    'get',
+    '/api/links',
+    {
+      refetchInterval: 60 * 1000,
+    },
+  );
 
   const handleRefresh = async () => {
     setRefreshing(true);

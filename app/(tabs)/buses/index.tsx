@@ -42,11 +42,9 @@ export default function BusesScreen() {
   const { favorites, toggleFavorite, isFavorite } = useFavoriteBuses();
   const { showErrorToast } = useErrorToast();
 
-  const { data, error, isLoading, refetch } = $api.useQuery(
-    'get',
-    '/api/buses',
-    {},
-  );
+  const { data, error, refetch } = $api.useQuery('get', '/api/buses', {
+    refetchInterval: 60 * 1000,
+  });
   const busMap = data?.data || {};
 
   const sortedBusKeys = Object.keys(busMap).sort((a, b) => {

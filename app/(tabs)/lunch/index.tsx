@@ -4,13 +4,8 @@ import NoLunchToday from '@/components/lunch/no-lunch-today';
 import { useErrorToast } from '@/hooks/use-error-toast';
 import { $api } from '@/network/client';
 import { components } from '@/network/openapi/v1';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { withUniwind } from 'uniwind';
-
-const StyledIonicons = withUniwind(Ionicons);
 
 // Milk/Condiments; Deli; Sides
 const UNWANTED_SECTIONS = [3676, 3088, 3090];
@@ -24,7 +19,6 @@ function dateToYYYYMMDD(date: Date) {
 }
 
 export default function LunchScreen() {
-  const headerHeight = useHeaderHeight();
   const { showErrorToast } = useErrorToast();
   const [date, setDate] = useState(new Date());
   const [menu, setMenu] = useState<components['schemas']['MenuDayDto'] | null>(
@@ -33,11 +27,9 @@ export default function LunchScreen() {
   const [dateStartBound, setDateStartBound] = useState<Date | null>();
   const [dateEndBound, setDateEndBound] = useState<Date | null>();
 
-  const { data, error, isLoading } = $api.useQuery(
-    'get',
-    '/api/lunch/week',
-    {},
-  );
+  const { data, error } = $api.useQuery('get', '/api/lunch/week', {
+    refetchInterval: 60 * 1000,
+  });
   const menuWeek = data?.data;
 
   useEffect(() => {
