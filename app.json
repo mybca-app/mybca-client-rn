@@ -71,40 +71,7 @@
       "@react-native-community/datetimepicker",
       "@react-native-firebase/app",
       "@react-native-firebase/messaging",
-      [
-        "expo-quick-actions",
-        {
-          "iosActions": [
-            {
-              "id": "0",
-              "title": "Buses",
-              /*"subtitle": "Subtitle One",*/
-              "icon": "symbol:bus",
-              "params": {
-                "href": "/buses"
-              }
-            },
-            {
-              "id": "1",
-              "title": "Lunch",
-              /*"subtitle": "Subtitle One",*/
-              "icon": "symbol:fork.knife",
-              "params": {
-                "href": "/lunch"
-              }
-            },
-            {
-              "id": "2",
-              "title": "News",
-              /*"subtitle": "Subtitle One",*/
-              "icon": "symbol:newspaper",
-              "params": {
-                "href": "/news"
-              }
-            }
-          ]
-        }
-      ]
+      "expo-quick-actions"
     ],
     "experiments": {
       "typedRoutes": true,
