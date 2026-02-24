@@ -47,11 +47,11 @@ function EventCard({ event }: { event: Event }) {
             )}
 
             {event.organization && (
-              <Chip variant="secondary" className="bg-overlay">
+              <Chip variant="tertiary" className="bg-overlay">
                 <StyledIonicons
                   name="people"
                   size={12}
-                  className="text-accent"
+                  className="text-foreground"
                 />
                 <Chip.Label>{event.expand['organization'].name}</Chip.Label>
               </Chip>
