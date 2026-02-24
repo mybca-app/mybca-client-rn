@@ -36,7 +36,7 @@ export default function NewsScreen() {
           <Text className="text-foreground">
             Stories are provided by our school newspaper, the Academy Chronicle.
           </Text>
-          <View className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
+          <View className="flex flex-col gap-2 mt-4">
             {stories && stories.length > 0
               ? stories.map((story) => (
                   <NewsCard

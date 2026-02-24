@@ -1,9 +1,9 @@
 import { components } from '@/network/openapi/v1';
 import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { Image } from 'expo-image';
-import { BottomSheet } from 'heroui-native';
+import { BottomSheet, cn } from 'heroui-native';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { withUniwind } from 'uniwind';
 import LunchFoodCard from './lunch-food-card';
 import NutritionItem from './nutrition-item';
@@ -29,9 +29,14 @@ export default function LunchBottomSheet({
       <BottomSheet.Portal>
         <BottomSheet.Overlay />
         <BottomSheet.Content
-          snapPoints={['40%', '80%']}
+          snapPoints={Platform.OS === 'web' ? ['50%'] : ['40%', '80%']}
           enableOverDrag={false}
           enableDynamicSizing={false}
+          className={cn(
+            Platform.OS === 'web'
+              ? 'bg-overlay rounded-xl max-w-3xl mx-auto'
+              : '',
+          )}
           contentContainerClassName="h-full"
         >
           <BottomSheetScrollView
