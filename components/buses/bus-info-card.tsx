@@ -11,19 +11,17 @@ export default function BusInfoCard({
   isLoading?: boolean;
 }) {
   return (
-    <SkeletonGroup>
+    <SkeletonGroup isLoading={isLoading}>
       <Card className="w-full">
         <Card.Body className="gap-4">
-          <View className="justify-center flex-1 overflow-hidden">
+          <View className="justify-center overflow-hidden">
             <Card.Description>{name}</Card.Description>
 
-            <Card.Title ellipsizeMode="tail" className="flex-wrap">
-              {isLoading ? (
-                <SkeletonGroup.Item className="w-36 h-6 rounded" />
-              ) : (
-                value
-              )}
-            </Card.Title>
+            <SkeletonGroup.Item className="w-36 h-6 rounded">
+              <Card.Title ellipsizeMode="tail" className="flex-wrap">
+                {value}
+              </Card.Title>
+            </SkeletonGroup.Item>
           </View>
         </Card.Body>
       </Card>

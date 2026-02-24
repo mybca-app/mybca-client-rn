@@ -4,8 +4,9 @@ import NoLunchToday from '@/components/lunch/no-lunch-today';
 import { useErrorToast } from '@/hooks/use-error-toast';
 import { $api } from '@/network/client';
 import { components } from '@/network/openapi/v1';
+import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 // Milk/Condiments; Deli; Sides
 const UNWANTED_SECTIONS = [3676, 3088, 3090];
@@ -35,7 +36,6 @@ export default function LunchScreen() {
   useEffect(() => {
     if (error) {
       console.log(error);
-
       showErrorToast('Error fetching lunch', 'Please try again later.');
     }
   }, [error]);
@@ -63,36 +63,37 @@ export default function LunchScreen() {
     setMenu(m);
   }, [data, date]);
 
+  const filteredItems =
+    menu?.menuItems.filter(
+      (item) => !UNWANTED_SECTIONS.includes(item.stationID),
+    ) ?? [];
+
   return (
-    <ScrollView
+    <FlashList
       className="bg-background"
-      contentContainerStyle={{
-        padding: 16,
-      }}
+      contentContainerStyle={{ padding: 16 }}
       contentInsetAdjustmentBehavior="automatic"
-    >
-      <View className="flex flex-col gap-2">
-        <Text className="text-foreground mb-2">
-          Lunch menus are subject to change and may be inaccurate.
-        </Text>
-        {dateStartBound && dateEndBound && (
-          <DatePicker
-            startDate={dateStartBound}
-            endDate={dateEndBound}
-            selectedDate={date}
-            setSelectedDate={setDate}
-          />
-        )}
-        {!menu && <NoLunchToday />}
-        {menu &&
-          (menu.menuItems.length === 0 ? (
-            <NoLunchToday />
-          ) : (
-            menu?.menuItems
-              .filter((item) => !UNWANTED_SECTIONS.includes(item.stationID))
-              .map((item, index) => <LunchItem key={index} item={item} />)
-          ))}
-      </View>
-    </ScrollView>
+      data={filteredItems}
+      keyExtractor={(_, index) => index.toString()}
+      ItemSeparatorComponent={() => <View className="h-2" />}
+      ListHeaderComponent={
+        <View className="flex flex-col gap-2">
+          <Text className="text-foreground mb-2">
+            Lunch menus are subject to change and may be inaccurate.
+          </Text>
+          {dateStartBound && dateEndBound && (
+            <DatePicker
+              startDate={dateStartBound}
+              endDate={dateEndBound}
+              selectedDate={date}
+              setSelectedDate={setDate}
+            />
+          )}
+          {!menu && <NoLunchToday />}
+          {menu && menu.menuItems.length === 0 && <NoLunchToday />}
+        </View>
+      }
+      renderItem={({ item }) => <LunchItem item={item} />}
+    />
   );
 }

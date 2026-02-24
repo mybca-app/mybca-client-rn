@@ -2,9 +2,10 @@ import NewsCard from '@/components/news/news-card';
 import NewsCardSkeleton from '@/components/news/news-card-skeleton';
 import { useErrorToast } from '@/hooks/use-error-toast';
 import { $api } from '@/network/client';
+import { FlashList } from '@shopify/flash-list';
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function NewsScreen() {
   const { showErrorToast } = useErrorToast();
@@ -25,34 +26,34 @@ export default function NewsScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'News' }} />
-      <ScrollView
+      <FlashList
         className="bg-background"
-        contentContainerStyle={{
-          padding: 16,
-        }}
+        contentContainerStyle={{ padding: 16 }}
         contentInsetAdjustmentBehavior="automatic"
-      >
-        <View className="flex flex-col gap-2">
-          <Text className="text-foreground">
+        data={stories.length > 0 ? stories : new Array(10).fill('')}
+        keyExtractor={(item, index) =>
+          item?.id ? item.id.toString() : index.toString()
+        }
+        ItemSeparatorComponent={() => <View className="h-2" />}
+        ListHeaderComponent={
+          <Text className="text-foreground mb-4">
             Stories are provided by our school newspaper, the Academy Chronicle.
           </Text>
-          <View className="flex flex-col gap-2 mt-4">
-            {stories && stories.length > 0
-              ? stories.map((story) => (
-                  <NewsCard
-                    key={story.id}
-                    title={story.title}
-                    date={new Date(story.createdAt)}
-                    storyLink={story.link}
-                    imageLink={story.imageLink}
-                  />
-                ))
-              : new Array(10)
-                  .fill('')
-                  .map((_, index) => <NewsCardSkeleton key={index} />)}
-          </View>
-        </View>
-      </ScrollView>
+        }
+        renderItem={({ item, index }) =>
+          item ? (
+            <NewsCard
+              key={item.id}
+              title={item.title}
+              date={new Date(item.createdAt)}
+              storyLink={item.link}
+              imageLink={item.imageLink}
+            />
+          ) : (
+            <NewsCardSkeleton key={index} />
+          )
+        }
+      />
     </>
   );
 }

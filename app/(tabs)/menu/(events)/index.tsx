@@ -3,10 +3,11 @@ import EventCardSkeleton from '@/components/events/event-card-skeleton';
 import { useErrorToast } from '@/hooks/use-error-toast';
 import { pb } from '@/network/pocketbase/pb-client';
 import { Event } from '@/network/pocketbase/pocketbase';
+import { FlashList } from '@shopify/flash-list';
 import { useQuery } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { RefreshControl, ScrollView, View } from 'react-native';
+import { RefreshControl, View } from 'react-native';
 
 export default function EventsScreen() {
   const { showErrorToast } = useErrorToast();
@@ -32,7 +33,6 @@ export default function EventsScreen() {
   useEffect(() => {
     if (error) {
       console.log(error);
-
       showErrorToast('Error fetching events', 'Please try again later.');
     }
   }, [error]);
@@ -40,28 +40,26 @@ export default function EventsScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Events' }} />
-      <ScrollView
+      <FlashList
         className="bg-background"
-        contentContainerStyle={{
-          padding: 16,
-        }}
+        contentContainerStyle={{ padding: 16 }}
         contentInsetAdjustmentBehavior="automatic"
+        data={data ? data.items : new Array(10).fill('')}
+        keyExtractor={(item, index) =>
+          item?.id ? item.id.toString() : index.toString()
+        }
+        renderItem={({ item, index }) =>
+          item ? (
+            <EventCard key={item.id} event={item as unknown as Event} />
+          ) : (
+            <EventCardSkeleton key={index} />
+          )
+        }
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
-      >
-        <View className="flex flex-col gap-2">
-          <View className="flex flex-col gap-2">
-            {data
-              ? data.items.map((event) => (
-                  <EventCard key={event.id} event={event as unknown as Event} />
-                ))
-              : new Array(10)
-                  .fill('')
-                  .map((_, index) => <EventCardSkeleton key={index} />)}
-          </View>
-        </View>
-      </ScrollView>
+        ItemSeparatorComponent={() => <View className="h-2" />}
+      />
     </>
   );
 }
