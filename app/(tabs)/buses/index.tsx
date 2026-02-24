@@ -183,12 +183,14 @@ export default function BusesScreen() {
             </View>
           </View>
         </View>
-        <BusesBottomSheet
-          isOpen={isBottomSheetOpen}
-          setIsOpen={setIsBottomSheetOpen}
-          spreadsheetUrl="https://docs.google.com/spreadsheets/u/1/d/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/htmlview#gid=0"
-          expiryTime={new Date()}
-        />
+        {data && (
+          <BusesBottomSheet
+            isOpen={isBottomSheetOpen}
+            setIsOpen={setIsBottomSheetOpen}
+            spreadsheetUrl="https://docs.google.com/spreadsheets/u/1/d/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/htmlview#gid=0"
+            expiryTime={new Date(data.expiry ?? '')}
+          />
+        )}
 
         <View className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
           {busMap && sortedBusKeys.length > 0
