@@ -24,7 +24,7 @@ export default function SectionNews({
         <Button
           variant="outline"
           size="sm"
-          onPress={() => router.navigate('/menu/(news)')}
+          onPress={() => router.navigate('/(tabs)/menu/(news)')}
         >
           <Button.Label className="text-foreground">All News</Button.Label>
           <StyledIonicons

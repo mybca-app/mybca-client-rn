@@ -2,6 +2,7 @@ import EventCard from '@/components/events/event-card';
 import EventCardSkeleton from '@/components/events/event-card-skeleton';
 import { useErrorToast } from '@/hooks/use-error-toast';
 import { pb } from '@/network/pocketbase/pb-client';
+import { Event } from '@/network/pocketbase/pocketbase';
 import { useQuery } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';

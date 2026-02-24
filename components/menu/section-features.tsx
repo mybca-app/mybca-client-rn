@@ -11,7 +11,7 @@ export default function SectionFeatures() {
           &nbsp; Features
         </Text>
       </View>
-      <View className="flex flex-row mt-3 gap-5">
+      <View className="flex flex-row flex-wrap mt-3 gap-5">
         <FeatureIcon
           icon="bus"
           color="rgb(227, 187, 54)"
