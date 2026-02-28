@@ -1,4 +1,5 @@
 import DatePicker from '@/components/lunch/date-picker';
+import LunchBottomSheet from '@/components/lunch/lunch-bottom-sheet';
 import LunchItem from '@/components/lunch/lunch-item';
 import NoLunchToday from '@/components/lunch/no-lunch-today';
 import { useErrorToast } from '@/hooks/use-error-toast';
@@ -27,6 +28,10 @@ export default function LunchScreen() {
   );
   const [dateStartBound, setDateStartBound] = useState<Date | null>();
   const [dateEndBound, setDateEndBound] = useState<Date | null>();
+  const [bottomSheetIsOpen, setBottomSheetIsOpen] = useState(false);
+  const [bottomSheetActiveItem, setBottomSheetActiveItem] = useState<
+    components['schemas']['FoodItemDto'] | null
+  >(null);
 
   const { data, error } = $api.useQuery('get', '/api/lunch/week', {
     refetchInterval: 60 * 1000,
@@ -91,9 +96,22 @@ export default function LunchScreen() {
           )}
           {!menu && <NoLunchToday />}
           {menu && menu.menuItems.length === 0 && <NoLunchToday />}
+          <LunchBottomSheet
+            item={bottomSheetActiveItem}
+            isOpen={bottomSheetIsOpen}
+            setIsOpen={setBottomSheetIsOpen}
+          />
         </View>
       }
-      renderItem={({ item }) => <LunchItem item={item} />}
+      renderItem={({ item }) => (
+        <LunchItem
+          item={item}
+          onFoodCardPress={() => {
+            setBottomSheetActiveItem(item.food);
+            setBottomSheetIsOpen(true);
+          }}
+        />
+      )}
     />
   );
 }
