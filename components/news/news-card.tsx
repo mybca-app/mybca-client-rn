@@ -4,6 +4,7 @@ import { Card, PressableFeedback } from 'heroui-native';
 import { memo } from 'react';
 import { View } from 'react-native';
 import { withUniwind } from 'uniwind';
+import { decode } from 'html-entities';
 
 const StyledImage = withUniwind(Image);
 
@@ -39,7 +40,7 @@ function NewsCard({
           )}
           <View className="justify-center flex-1 overflow-hidden">
             <Card.Title ellipsizeMode="tail" className="mb-1 flex-wrap">
-              {title}
+              {decode(title)}
             </Card.Title>
 
             <Card.Description>{date.toLocaleDateString()}</Card.Description>
