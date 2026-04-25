@@ -9,10 +9,11 @@ import { $api } from '@/network/client';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { FlashList } from '@shopify/flash-list';
 import * as Haptics from 'expo-haptics';
-import { Stack } from 'expo-router';
+import { Stack, useFocusEffect } from 'expo-router';
 import { Button, SearchField, Select } from 'heroui-native';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
+  AppState,
   RefreshControl,
   ScrollView,
   Text,
@@ -44,6 +45,36 @@ export default function BusesScreen() {
   const { data, error, refetch } = $api.useQuery('get', '/api/buses', {
     refetchInterval: 60 * 1000,
   });
+
+  const appState = useRef(AppState.currentState);
+
+  const refetchOnFocus = async () => {
+    if (data) {
+      console.debug('Refetching bus data because bus screen was refocused.');
+      await refetch();
+    }
+  };
+
+  // Thank you, Claude! :)
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === 'active'
+      ) {
+        (async () => await refetchOnFocus())();
+      }
+      appState.current = nextAppState;
+    });
+
+    return () => subscription.remove();
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => await refetchOnFocus())();
+    }, []),
+  );
 
   const busMap = data?.data || {};
 
