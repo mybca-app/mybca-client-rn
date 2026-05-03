@@ -1,5 +1,6 @@
 import ArrivalListItem from '@/components/buses/arrival-list-item';
 import BusInfoCard from '@/components/buses/bus-info-card';
+import { formatArrivalTime } from '@/helpers/datetime';
 import { useHeaderColor } from '@/hooks/use-header-color';
 import { $api } from '@/network/client';
 import { FlashList } from '@shopify/flash-list';
@@ -56,6 +57,12 @@ export default function BusDetailScreen() {
               <BusInfoCard
                 name="Company"
                 value={infoData?.company?.name ?? ''}
+                isLoading={infoIsLoading}
+              />
+
+              <BusInfoCard
+                name="Average Arrival Time"
+                value={infoData?.averageArrivalTime ? formatArrivalTime(infoData?.averageArrivalTime) : ''}
                 isLoading={infoIsLoading}
               />
             </View>
