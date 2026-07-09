@@ -1,11 +1,4 @@
-import MIcons from '@expo/vector-icons/MaterialIcons';
-import {
-  Icon,
-  Label,
-  NativeTabs,
-  VectorIcon,
-} from 'expo-router/unstable-native-tabs';
-import React from 'react';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
 
 import { useColorScheme } from 'react-native';
 
@@ -26,32 +19,20 @@ export default function TabLayout() {
       }
     >
       <NativeTabs.Trigger name="(home)">
-        <Label>Home</Label>
-        <Icon
-          sf="house.fill"
-          androidSrc={<VectorIcon family={MIcons} name="home" />}
-        />
+        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="buses">
-        <Icon
-          sf="bus.fill"
-          androidSrc={<VectorIcon family={MIcons} name="directions-bus" />}
-        />
-        <Label>Buses</Label>
+        <NativeTabs.Trigger.Label>Buses</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="bus.fill" md="directions_bus" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="lunch">
-        <Icon
-          sf="fork.knife"
-          androidSrc={<VectorIcon family={MIcons} name="lunch-dining" />}
-        />
-        <Label>Lunch</Label>
+        <NativeTabs.Trigger.Label>Lunch</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="fork.knife" md="lunch_dining" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="menu">
-        <Icon
-          sf="ellipsis"
-          androidSrc={<VectorIcon family={MIcons} name="menu" />}
-        />
-        <Label>More</Label>
+        <NativeTabs.Trigger.Label>More</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="ellipsis" md="menu" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );
