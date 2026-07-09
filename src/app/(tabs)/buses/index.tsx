@@ -174,7 +174,7 @@ export default function BusesScreen() {
                       const selected = BUS_SCREEN_FILTERS.find(
                         (f) => f.value === value.values().next().value,
                       );
-                      setActiveFilter(selected!);
+                      setActiveFilter(selected ?? BUS_SCREEN_FILTERS[0]);
                     }}
                     className="w-full -mb-2 mt-1"
                     size="lg"
