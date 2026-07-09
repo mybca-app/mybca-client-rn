@@ -10,16 +10,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { FlashList } from '@shopify/flash-list';
 import * as Haptics from 'expo-haptics';
 import { Stack, useFocusEffect } from 'expo-router';
-import { Button, SearchField, Select } from 'heroui-native';
+import { Button, SearchField, TagGroup } from 'heroui-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-    AppState,
-    RefreshControl,
-    ScrollView,
-    Text,
-    useColorScheme,
-    View,
-} from 'react-native';
+import { AppState, RefreshControl, useColorScheme, View } from 'react-native';
 
 type BusScreenFilter = { value: string; label: string };
 
@@ -32,10 +25,9 @@ const BUS_SCREEN_FILTERS: BusScreenFilter[] = [
 
 export default function BusesScreen() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<BusScreenFilter>({
-    value: 'all',
-    label: 'All',
-  });
+  const [activeFilter, setActiveFilter] = useState<BusScreenFilter>(
+    BUS_SCREEN_FILTERS[0],
+  );
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [refreshing, setRefreshing] = useState(false);
 
@@ -160,12 +152,12 @@ export default function BusesScreen() {
         }
         ListHeaderComponent={
           <>
-            <View style={{ padding: 16 }} className="flex gap-2">
-              <View className="flex-row gap-2 items-center">
+            <View style={{ padding: 16 }}>
+              <View className="flex-col gap-2 items-center">
                 <SearchField
                   value={searchQuery}
                   onChange={setSearchQuery}
-                  className="grow"
+                  className="grow w-full"
                 >
                   <SearchField.Group>
                     <SearchField.SearchIcon />
@@ -175,45 +167,26 @@ export default function BusesScreen() {
                 </SearchField>
 
                 <View>
-                  <Select
-                    value={activeFilter}
-                    onValueChange={(value) => {
+                  <TagGroup
+                    selectionMode="single"
+                    selectedKeys={[activeFilter.value]}
+                    onSelectionChange={(value) => {
                       const selected = BUS_SCREEN_FILTERS.find(
-                        (f) => f.value === value?.value,
+                        (f) => f.value === value.values().next().value,
                       );
                       setActiveFilter(selected!);
                     }}
+                    className="w-full -mb-2 mt-1"
+                    size="lg"
                   >
-                    <Select.Trigger asChild>
-                      <Button variant="tertiary">
-                        <Text className="text-foreground">
-                          {activeFilter.label}
-                        </Text>
-                      </Button>
-                    </Select.Trigger>
-                    <Select.Portal>
-                      <Select.Overlay />
-                      <Select.Content
-                        presentation="popover"
-                        width={140}
-                        placement="bottom"
-                      >
-                        <ScrollView>
-                          {BUS_SCREEN_FILTERS.map((item) => (
-                            <Select.Item
-                              key={item.value}
-                              value={item.value}
-                              label={item.label}
-                            >
-                              <Text className="text-base text-foreground flex-1">
-                                {item.label}
-                              </Text>
-                            </Select.Item>
-                          ))}
-                        </ScrollView>
-                      </Select.Content>
-                    </Select.Portal>
-                  </Select>
+                    <TagGroup.List>
+                      {BUS_SCREEN_FILTERS.map((item) => (
+                        <TagGroup.Item key={item.value} id={item.value}>
+                          <TagGroup.ItemLabel>{item.label}</TagGroup.ItemLabel>
+                        </TagGroup.Item>
+                      ))}
+                    </TagGroup.List>
+                  </TagGroup>
                 </View>
               </View>
             </View>
