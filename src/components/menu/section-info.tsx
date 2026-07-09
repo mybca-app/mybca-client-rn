@@ -1,4 +1,4 @@
-import { version } from '@/package.json';
+import { version } from '@/../package.json';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Text, View } from 'react-native';
 import InfoItem from './info-item';

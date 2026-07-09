@@ -2,7 +2,7 @@ import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
-} from '@react-navigation/native';
+} from "expo-router/react-navigation";
 import * as QuickActions from 'expo-quick-actions';
 import { RouterAction, useQuickActionRouting } from 'expo-quick-actions/router';
 import { Stack } from 'expo-router';

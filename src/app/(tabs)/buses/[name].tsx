@@ -62,7 +62,11 @@ export default function BusDetailScreen() {
 
               <BusInfoCard
                 name="Average Arrival Time"
-                value={infoData?.averageArrivalTime ? formatArrivalTime(infoData?.averageArrivalTime) : ''}
+                value={
+                  infoData?.averageArrivalTime
+                    ? formatArrivalTime(infoData?.averageArrivalTime)
+                    : ''
+                }
                 isLoading={infoIsLoading}
               />
             </View>

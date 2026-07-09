@@ -13,12 +13,12 @@ import { Stack, useFocusEffect } from 'expo-router';
 import { Button, SearchField, Select } from 'heroui-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  AppState,
-  RefreshControl,
-  ScrollView,
-  Text,
-  useColorScheme,
-  View,
+    AppState,
+    RefreshControl,
+    ScrollView,
+    Text,
+    useColorScheme,
+    View,
 } from 'react-native';
 
 type BusScreenFilter = { value: string; label: string };
