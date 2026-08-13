@@ -18,6 +18,11 @@ export default function SectionSupport() {
           icon="globe"
         />
         <LinkCard
+          name="GPA Calculator"
+          destination="https://gpa.mybca.link"
+          icon="school"
+        />
+        <LinkCard
           name="Support and Privacy"
           destination="https://mybca.link/docs"
           icon="help"
