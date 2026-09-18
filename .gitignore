@@ -44,3 +44,5 @@ app-example
 
 # Firebase
 /firebase
+
+GoogleService-Info.plist
